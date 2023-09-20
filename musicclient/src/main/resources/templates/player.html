@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Simple Music Player</title>
+
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css}">
+
+  <link th:href="@{/css/Style2.css}" rel="stylesheet">
+  <style>
+
+
+    .text-div {
+      margin: 25px;
+      height: 250px;
+      width: 250px;
+      overflow: auto;
+      border: 1px solid #ccc;
+
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script th:src="@{/js/main.js}"></script>
+
+  <script th:inline="javascript">
+
+    function toggle() {
+      var x = document.getElementById("text-div");
+      var y = document.querySelector(".track-art");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+        y.style.display = "none";
+      } else {
+        x.style.display = "none";
+        y.style.display = "block";
+      }
+    }
+    window.addEventListener("DOMContentLoaded", () => {
+      const trackArt = document.querySelector(".track-art");
+
+      const audioPath2 = /*[[${visualPath2}]]*/ '';
+      const localImage = audioPath2;
+      const defaultImage = "https://source.unsplash.com/Qrspubmx6kE/640x360"; // Default image URL
+
+      console.log(localImage);
+
+      // Check if the local image URL is not empty
+      if (localImage.trim() !== '') {
+        console.log("OK");
+        trackArt.style.backgroundImage = `url(${localImage})`;
+      } else {
+        trackArt.style.backgroundImage = `url(${defaultImage})`;
+      }
+
+
+    });
+  </script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+<div class="player">
+
+  <!-- Define the section for displaying details -->
+  <div class="details">
+    <div class="now-playing">PLAYING <span th:text="${x}"></span> OF <span th:text="${y}"></span></div>
+    <div class="track-art" th:style="'background-image: url(\'' + ${visualPath2} + '\');'" onclick="toggle()"></div>
+    <div id="text-div" class ="text-div hidden" onclick="toggle()">
+      <pre th:text="${Lyrics}">
+
+        hello
+      </pre>
+    </div>
+    <div class="track-name" th:text="${trackName}">Track Name</div>
+    <div class="track-artist" th:text="${trackArtist}">Track Artist</div>
+    <p id="timestamp" class ="text-div hidden" >0</p>
+    <p id="line"></p>
+  </div>
+
+  <!-- Define the section for displaying track buttons -->
+  <audio id="audioPlayer" controls>
+    <source id="audioSource" th:src="@{${audioPath2}}" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<!-- Load the main script for the player -->
+
+</body>
+<script th:inline="javascript">
+  const audioPlayer = document.getElementById('audioPlayer');
+  const timestampElement = document.getElementById('timestamp');
+  const lineElement= document.getElementById('line')
+  audioPlayer.addEventListener('timeupdate', function() {
+    const currentTime = audioPlayer.currentTime;
+    const duration = audioPlayer.duration;
+    const timestamp = Math.floor(currentTime);
+    timestampElement.textContent = timestamp;
+    const contentElement = document.getElementById('text-div');
+    const content = contentElement.textContent;
+
+    const regex = /\((\d+)\)\s*(.+)/g;
+
+    let input = timestamp; // Input value
+    input+=1;
+    console.log(input);
+    let line = document.getElementById('line');
+    let maxNumber = -1;
+    let maxContent = '';
+
+    let match;
+    while (match = regex.exec(content)) {
+      const number = parseInt(match[1], 10);
+      if (number > maxNumber && number < input) {
+        maxNumber = number;
+        maxContent = match[2];
+      }
+    }
+    lineElement.textContent = maxContent;
+    console.log(`Largest Number: ${maxNumber}`);
+    console.log(`Content beside Largest Number: ${maxContent}`);
+  });
+
+
+</script>
+</html>

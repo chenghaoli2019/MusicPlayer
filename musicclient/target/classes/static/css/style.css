@@ -1,0 +1,101 @@
+body {
+    background: linear-gradient(to bottom right, cyan, #ff00ff);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.play-now-btn{
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.btn.btn-primary {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.btn.btn-primary:hover {
+    background-color: #45a049;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    transform: translateY(1px);
+}
+
+.btn.btn-primary:active {
+    transform: translateY(2px);
+}
+.controls {
+    margin-top: 20px;
+}
+
+#progressBar {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    margin-top: 10px;
+}
+
+.row {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#progress {
+    height: 100%;
+    background-color: #337ab7;
+    width: 0%;
+}
+.music-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.music-row {
+    display: flex;
+    align-items: center;
+}
+
+
+.play-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #1db954;
+}
+
+.music-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.play-now-btn,
+.play-button {
+    background-color: #1db954;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.music-name {
+    font-weight: bold;
+}
